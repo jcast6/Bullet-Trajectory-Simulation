@@ -45,6 +45,7 @@ def create_gui():
 
     for i, label in enumerate(env_char_labels):
         tk.Label(frame2, text=label).grid(row=i, column=0, padx=5, pady=5)
+        tk.Label(frame2, text="Wind Direction (degrees, clockwise from North)").grid(row=3, column=0, padx=5, pady=5)
         tk.Entry(frame2, textvariable=env_char_vars[i]).grid(row=i, column=1, padx=5, pady=5)
 
     tk.Button(root, text="Run Simulation", command=run_simulation).pack(pady=20)
