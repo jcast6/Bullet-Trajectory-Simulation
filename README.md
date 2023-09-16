@@ -17,8 +17,10 @@ The simulation uses various math formulas to calculate the bullet's trajectory.
 1. **Velocity Update**
    
    The velocity is updated considering Coriolis effect, gravity, and wind effect:
-   
-$$\[\vec{V}_{\text{new}} = \vec{V}_{\text{old}} + (\vec{A}_{\text{coriolis}} - \vec{A}_{\text{gravity}} + \vec{A}_{\text{wind}}) \Delta t\]$$
+
+```math
+\[\vec{V}_{\text{new}} = \vec{V}_{\text{old}} + (\vec{A}_{\text{coriolis}} - \vec{A}_{\text{gravity}} + \vec{A}_{\text{wind}}) \Delta t\]
+```
    
 2. **Coriolis Effect**
    
