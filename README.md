@@ -1,54 +1,56 @@
 # Ballistic Trajectory Simulation
 
-Ballistic Trajectory Simulation is a Python application developed to simulate the trajectory of a bullet considering various environmental and bullet characteristics. The program also features a GUI to ease the process of inputting necessary data.
+## Overview
+The ballistic trajectory simulation is a program designed to simulate the trajectory of a bullet, taking into account various environmental and bullet characteristics. The user can specify the attributes of the bullet and the environment through a GUI, and the program will simulate the trajectory, considering aspects such as the Coriolis effect, gravity, and wind.
 
-## Features
+## Input
+Through the GUI, you can input the following bullet characteristics:
+- Mass (kg)
+- Velocity (m/s)
+- Energy (J)
+- Twist Rate (in)
+- Initial X Position (m)
+- Initial Y Position (m)
+- Initial Z Position (m)
 
-1. **Graphical User Interface (GUI)** - A user-friendly GUI to input bullet and environment characteristics without needing to interact with the command line.
-2. **Bullet Trajectory Simulation** - Accurate simulation of bullet trajectory considering various factors like gravity, wind speed, and Coriolis effect.
-3. **Simulation Visualization** - Visual representation of the bullet trajectory in a 3D graph.
-4. **Data Export** - The trajectory data is saved to an Excel sheet for further analysis and reference.
-5. **Simulation Results Popup** - A popup displaying the initial and final positions of the bullet after the simulation.
+As well as the environmental characteristics:
+- Gravity (m/s²)
+- Wind Speed (m/s)
+- Latitude (degrees)
+- Wind Direction (degrees)
 
-## Formulas Used
+After inputting the values, click "Run Simulation" to start the simulation.
 
-1. **Bullet Characteristics Formulas:**
-   - Kinetic Energy: \( E = \frac{1}{2} m v^2 \)
-   
-2. **Coriolis Effect Formula:**
-   - \( a_{coriolis} = \begin{bmatrix} -2v_y \omega \sin(\alpha) \\ 2v_x \omega \sin(\alpha) \\ 0 \end{bmatrix} \)
-   
-   where:
-   - \( a_{coriolis} \): Coriolis acceleration vector
-   - \( v_x \): velocity along the x-axis
-   - \( v_y \): velocity along the y-axis
-   - \( \omega \): Earth's angular velocity (0.0000727 rad/s)
-   - \( \alpha \): Latitude in radians
+## Output
+The simulation results will be displayed graphically as a 3D plot showing the bullet's trajectory. The initial and final positions will be shown in a message box and the trajectory data will be saved as an Excel file.
 
-## GUI Overview
+## Understanding the Formulas
+The simulation uses several formulas to update the bullet's characteristics as it travels. Here, we detail the main formulas used:
 
-The GUI consists of two frames:
+### Updating Bullet Spin:
+The bullet's spin is updated based on its current velocity and the twist rate.
+self.spin = velocity_ft_s * 720 / self.twist_rate
 
-1. **Frame 1** (Bullet Characteristics):
-   - Mass (kg)
-   - Velocity (m/s)
-   - Energy (J)
-   - Twist Rate (in)
-   - Initial X Position (m)
-   - Initial Y Position (m)
-   - Initial Z Position (m)
+### Coriolis Effect
+The Coriolis effect is calculated using the following formula:
+a_coriolis = np.array([-2*v[1]*w*math.sin(alpha), 2*v[0]*w*math.sin(alpha), 0])
 
-2. **Frame 2** (Environment Characteristics):
-   - Gravity (m/s²)
-   - Wind Speed (m/s)
-   - Latitude (degrees)
-   - Wind Direction
+Where:
+w is the Earth's angular velocity in rad/s (0.0000727 rad/s).
+alpha is the latitude in radians.
+v is the current bullet's velocity vector.
 
-After inputting the necessary details, click on "Run Simulation" to start the simulation.
+### Wind Effect
+The wind effect on the bullet is given by:
+wind_effect = np.array([-self.environment.wind * math.cos(math.radians(float(self.environment.direction))),-self.environment.wind * math.sin(math.radians(float(self.environment.direction))),0])
 
-## Output Data Sheets
+### Updating Bullet Position and Velocity
+The bullet's position and velocity are updated at each time step considering gravity, wind effect, and the Coriolis effect:
+self.bullet.position += self.bullet.velocity * dt
+self.bullet.velocity += (self.calculate_coriolis_effect() - np.array([0, 0, self.environment.gravity]) + wind_effect) * dt
 
-The simulation results are stored in Excel files with filenames following the pattern `simulation_results_<count>.xlsx`, where `<count>` is the number of simulations run since the start of the program.
+Here dt is the time step for the simulation (0.01 s).
 
 
-   
+
+
