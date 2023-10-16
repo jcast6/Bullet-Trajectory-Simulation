@@ -21,9 +21,6 @@ As well as the environmental characteristics:
 
 After inputting the values, click "Run Simulation" to start the simulation.
 
-## Output
-The simulation results will be displayed graphically as a 3D plot showing the bullet's trajectory. The initial and final positions will be shown in a message box and the trajectory data will be saved as an Excel file.
-
 ## Understanding the Formulas
 The simulation uses several formulas to update the bullet's characteristics as it travels. Here, we detail the main formulas used:
 
@@ -51,6 +48,11 @@ self.bullet.velocity += (self.calculate_coriolis_effect() - np.array([0, 0, self
 
 Here dt is the time step for the simulation (0.01 s).
 
+
+## Output
+The simulation results will be displayed graphically as a 3D plot showing the bullet's trajectory. The initial and final positions will be shown in a message box and the trajectory data will be saved as an Excel file.
+
+C:\Users\pimpd\Desktop\python_apps\bullet_trajectory_1.gif
 
 
 
