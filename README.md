@@ -52,6 +52,8 @@ Here dt is the time step for the simulation (0.01 s).
 ## Output
 The simulation results will be displayed graphically as a 3D plot showing the bullet's trajectory. The initial and final positions will be shown in a message box and the trajectory data will be saved as an Excel file.
 
+![](https://github.com/jcast6/Bullet-Trajectory-Simulation/blob/main/bullet_trajectory_1.gif)
+
 
 
 
